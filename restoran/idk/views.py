@@ -5,6 +5,12 @@ from .models import Movie
 
 class MoviesView(View):
     def get(self, request):
-        movies = Movie.object.all()
-        return render(request, "movies/movie_list.html", {"movie_list": movies})
+        movies = Movie.objects.all()
+        return render(request, 'movies/movies.html', {"movie_list": movies})
 
+
+
+class MovieDetailView(View):
+    def get(self, request, slug):
+        movie = Movie.objects.get(url=slug)
+        return render(request, "movies/movie_detail.html", {"movie": movie})
